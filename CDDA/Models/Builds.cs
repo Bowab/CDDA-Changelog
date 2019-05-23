@@ -32,7 +32,8 @@ namespace CDDA.Models
     {
         [XmlElement(ElementName = "msg")]
         public string Msg { get; set; }
-        public bool HasUrl { get; set; }
+
+        public string  GitHashNumber { get; set; }
     }
 
     public partial class Build

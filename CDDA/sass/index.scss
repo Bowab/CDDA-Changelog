@@ -33,7 +33,10 @@
             margin-bottom: 4px;
             padding-right: 10px;
             word-break: break-word;
-            /*font-size: 18px;*/
+
+            a {
+                text-decoration:none;
+            }
         }
     }
 
@@ -44,7 +47,6 @@
         padding-top: 10px;
 
         p {
-            /*font-size: 18px;*/
             margin: 0px 0px 5px 0px;
         }
 

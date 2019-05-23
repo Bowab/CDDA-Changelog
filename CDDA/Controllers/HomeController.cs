@@ -1,4 +1,5 @@
 ﻿using CDDA.Models;
+using CDDA.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace CDDA.Controllers
         {
             _buildsRepository = buildsRepository;
         }
-        
+
         public ActionResult Index()
         {
-            var model = _buildsRepository.GetStaticBuilds();
-
+            var model = new BuildsViewModel(_buildsRepository).GenerateViewModel();            
             return View(model);
         }
+
     }
 }
