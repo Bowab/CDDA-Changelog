@@ -1,1 +1,43 @@
-﻿<div class="orange-container">Hello World from index.</div>
+﻿@model CDDA.Models.Builds
+
+
+<div class="changelog-container">
+    @foreach (var b in Model.BuildList)
+    {
+        <div class="builds">
+
+            <span><a href="https://ci.narc.ro/job/Cataclysm-Matrix/@b.Number/">#@b.Number</a></span>
+            @if (b.Building)
+            {
+                <span> - </span><span class="still-bulding">Build still in progress</span>
+            }
+        </div>
+        <div class="changes">
+
+            @foreach (var c in b.ChangesetList)
+            {
+                <ul>
+                    @foreach (var i in c.ItemList)
+                    {
+                        <li>
+                            @i.Msg
+                        </li>
+                    }
+                </ul>
+            }
+            <div class="run-container">
+                @foreach (var r in b.RunList.Where(x => x.FullDisplayName.Contains(b.Number.ToString())))
+                {
+                    if (r.Result != null)
+                    {
+                        <p>@r.FullDisplayName.Trim('1', '.') : <span class="@(r.Result == "SUCCESS" ? "success" : "failure")">@r.Result</span></p>
+                    }
+                    else
+                    {
+                        <p>@r.FullDisplayName.Trim('1', '.') : <span class="in-progress">IN PROGRESS</span></p>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>

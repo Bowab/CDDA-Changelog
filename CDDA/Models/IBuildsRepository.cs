@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 
 namespace CDDA.Models
 {
-    public interface IChangelogRepository
+    public interface IBuildsRepository
     {
+        Builds GetStaticBuilds();
     }
 }
