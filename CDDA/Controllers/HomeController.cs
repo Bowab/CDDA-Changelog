@@ -17,8 +17,13 @@ namespace CDDA.Controllers
         }
 
         public ActionResult Index()
+        {          
+            return View();
+        }
+
+        public ActionResult Changelog()
         {
-            var model = new BuildsViewModel(_buildsRepository).GenerateViewModel();            
+            var model = new BuildsViewModel(_buildsRepository).GenerateViewModel();
             return View(model);
         }
 

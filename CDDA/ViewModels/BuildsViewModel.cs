@@ -11,13 +11,12 @@ namespace CDDA.ViewModels
     public class BuildsViewModel
     {
         private readonly IBuildsRepository _buildsRepository;
+        public List<Build> BuildList { get; set; }
+
         public BuildsViewModel(IBuildsRepository buildsRepository)
         {
             _buildsRepository = buildsRepository;
         }
-
-        public List<Build> BuildList { get; set; }
-
 
         public BuildsViewModel GenerateViewModel()
         {
@@ -36,7 +35,7 @@ namespace CDDA.ViewModels
                         if (item.Msg.Contains("#"))
                         {
                             Regex pattern = new Regex(@"\#(.\d+)");
-                            var result = Regex.Matches(item.Msg, pattern.ToString());                            
+                            var result = Regex.Matches(item.Msg, pattern.ToString());
                             StringBuilder sb = new StringBuilder();
                             foreach (Match m in result)
                             {
