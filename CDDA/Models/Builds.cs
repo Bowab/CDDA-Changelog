@@ -44,6 +44,9 @@ namespace CDDA.Models
         [XmlElement(ElementName = "number")]
         public int Number { get; set; }
 
+        [XmlElement(ElementName = "result")]
+        public string Result { get; set; }
+
         [XmlElement(ElementName = "timestamp")]
         public ulong Timestamp { get; set; }
 

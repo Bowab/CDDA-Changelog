@@ -21,7 +21,31 @@
         border-radius: 25px;
         padding: 10px 0px 10px 10px;
         max-width: 800px;
-        margin: 0px 8px 0px 10px
+        margin: 0px 8px 0px 10px;
+
+        span{
+            font-weight:900;
+        }
+
+        .build-success {
+            color: green;
+        }
+        
+        .build-fail{
+            color:red;
+        }
+    }
+
+    div.no-data-container {
+        background-color: beige;
+        border-radius: 0px;
+        padding: 10px 0px 10px 10px;
+        max-width: 100%;
+        margin: 20px 0px 0px 0px;
+
+        span {
+            color: red;
+        }
     }
 
     ul {
@@ -41,6 +65,7 @@
 
         .same-build {
             color: green;
+            list-style:none;
         }
     }
 
