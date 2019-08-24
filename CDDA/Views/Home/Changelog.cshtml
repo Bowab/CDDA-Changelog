@@ -10,7 +10,7 @@
                 <span> - </span><span class="still-bulding">Build still in progress</span>
             }
         </div>
-        <div class="changes">
+        <div >
             @foreach (var c in b.ChangesetList)
             {
                 <ul>
@@ -24,9 +24,7 @@
                         }
                         else
                         {
-                            <li>
-                                @i.Msg
-                            </li>
+                            <li class="@(i.Msg == "No changes, same code as previous build!" ? "same-build" : "")">@i.Msg</li> 
                         }
                     }
                 </ul>

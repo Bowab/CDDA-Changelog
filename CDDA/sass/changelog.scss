@@ -35,12 +35,14 @@
             word-break: break-word;
 
             a {
-                text-decoration:none;
+                text-decoration: none;
             }
         }
+
+        .same-build {
+            color: green;
+        }
     }
-
-
 
     .run-container {
         margin: 0;

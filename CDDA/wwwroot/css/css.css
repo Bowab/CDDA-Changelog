@@ -25,6 +25,8 @@
       word-break: break-word; }
       .changelog-container ul li a {
         text-decoration: none; }
+    .changelog-container ul .same-build {
+      color: green; }
   .changelog-container .run-container {
     margin: 0;
     padding-top: 10px; }

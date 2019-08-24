@@ -30,26 +30,38 @@ namespace CDDA.ViewModels
             {
                 foreach (var changeSet in build.ChangesetList)
                 {
-                    foreach (var item in changeSet.ItemList)
+                    if (changeSet.ItemList.Any())
                     {
-                        if (item.Msg.Contains("#"))
-                        {
-                            Regex pattern = new Regex(@"\#(.\d+)");
-                            var result = Regex.Matches(item.Msg, pattern.ToString());
-                            StringBuilder sb = new StringBuilder();
-                            foreach (Match m in result)
-                            {
-                                string add = m.Groups[1].Value;
-                                sb.Append(add);
-                            }
-                            item.GitHashNumber = sb.ToString();
 
-                            int index = item.Msg.LastIndexOf("(");
-                            if (index > 0)
+                        foreach (var item in changeSet.ItemList)
+                        {
+                            if (item.Msg.Contains("#"))
                             {
-                                item.Msg = item.Msg.Substring(0, index);
+                                Regex pattern = new Regex(@"\#(.\d+)");
+                                var result = Regex.Matches(item.Msg, pattern.ToString());
+                                StringBuilder sb = new StringBuilder();
+                                foreach (Match m in result)
+                                {
+                                    string add = m.Groups[1].Value;
+                                    sb.Append(add);
+                                }
+                                item.GitHashNumber = sb.ToString();
+
+                                int index = item.Msg.LastIndexOf("(");
+                                if (index > 0)
+                                {
+                                    item.Msg = item.Msg.Substring(0, index);
+                                }
                             }
                         }
+                    }
+                    else
+                    {
+                        var item = new Item
+                        {
+                            Msg = "No changes, same code as previous build!"
+                        };
+                        changeSet.ItemList.Add(item);
                     }
                 }
             }
