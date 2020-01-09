@@ -11,7 +11,7 @@ namespace CDDA.Models
     public class BuildsRepository : IBuildsRepository
     {
         private static readonly string _baseAdress = "https://ci.narc.ro/job/Cataclysm-Matrix/api/";
-        private static Builds _builds;
+        private static Builds _builds; // TODO: Behöver inte vara static längre
 
         public static void SetStaticBuilds()
         {
@@ -40,6 +40,9 @@ namespace CDDA.Models
                     _builds = new Builds();
                 }
             }
+
+            
+
         }
 
         public Builds GetStaticBuilds()

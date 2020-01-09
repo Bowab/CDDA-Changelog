@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CDDA.Models;
+using CDDA.ViewModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,7 @@ namespace CDDA
         {
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddSingleton<IBuildsRepository, BuildsRepository>();
+            services.AddScoped<BuildsViewModel>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

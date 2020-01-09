@@ -10,20 +10,23 @@ namespace CDDA.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IBuildsRepository _buildsRepository;
-        public HomeController(IBuildsRepository buildsRepository)
+        //private readonly IBuildsRepository _buildsRepository;
+        private readonly BuildsViewModel _buildsViewModel;
+
+        public HomeController(BuildsViewModel buildsViewModel)
         {
-            _buildsRepository = buildsRepository;
+            _buildsViewModel = buildsViewModel;
+            //_buildsRepository = buildsRepository;
         }
 
-        public ActionResult Index()
+        public IActionResult Index()
         {          
             return View();
         }
 
-        public ActionResult Changelog()
+        public IActionResult Changelog()
         {
-            var model = new BuildsViewModel(_buildsRepository).GenerateViewModel();
+            var model = _buildsViewModel.GenerateViewModel();
             return View(model);
         }
 

@@ -15,7 +15,7 @@ namespace CDDA
     {
         public static void Main(string[] args)
         {
-            BuildsRepository.SetStaticBuilds();
+            BuildsRepository.SetStaticBuilds(); // TODO: Gör om detta, detta bör istället ske på pageLoad.
             CreateWebHostBuilder(args).Build().Run();
         }
 

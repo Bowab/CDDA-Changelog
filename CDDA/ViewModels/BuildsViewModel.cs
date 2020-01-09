@@ -1,4 +1,6 @@
 ﻿using CDDA.Models;
+using Microsoft.AspNetCore.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,24 +15,43 @@ namespace CDDA.ViewModels
         private readonly IBuildsRepository _buildsRepository;
         public List<Build> BuildList { get; set; }
 
-        public BuildsViewModel(IBuildsRepository buildsRepository)
+        private IHostingEnvironment _env { get; set; }
+
+
+        public BuildsViewModel(IBuildsRepository buildsRepository, IHostingEnvironment env)
         {
+            _env = env;
             _buildsRepository = buildsRepository;
         }
 
         public BuildsViewModel GenerateViewModel()
         {
+
+            // 1. Skriv content till fil.
+
+            // 2. Kolla om filen är gammal eller ny.
+
+            // 3. Hämta fil om ny och gör till model, annars skriv ner den på fil
+
             var content = _buildsRepository.GetStaticBuilds();
+
+
+
+            
+
+
+
             if (content.BuildList == null)
-                return new BuildsViewModel(_buildsRepository);
+                return this;
             else
             {
-                var model = new BuildsViewModel(_buildsRepository)
-                {
-                    BuildList = content.BuildList
-                };
+                //var model = new BuildsViewModel(_buildsRepository)
+                //{
+                //    BuildList = content.BuildList
+                //};
+                this.BuildList = content.BuildList;
 
-                foreach (var build in model.BuildList)
+                foreach (var build in this.BuildList)
                 {
                     foreach (var changeSet in build.ChangesetList)
                     {
@@ -69,7 +90,24 @@ namespace CDDA.ViewModels
                         }
                     }
                 }
-                return model;
+
+
+                // START Skriva till och hämta från cache
+
+                var rootCachePath = @"Cache\builds.txt";
+                System.IO.Directory.CreateDirectory(System.IO.Path.Combine(_env.ContentRootPath, "Cache"));
+                var cachePath = System.IO.Path.Combine(_env.ContentRootPath, rootCachePath);
+
+                var cacheModel = new BuildCache(this, DateTime.Now);
+                string serializeContent = JsonConvert.SerializeObject(cacheModel);
+                System.IO.File.WriteAllText(cachePath, serializeContent);
+
+                var deserializeContent = System.IO.File.ReadAllText(@"C:\Users\Bowa\Desktop\cddamvc\CDDA\Cache\builds.txt", Encoding.UTF8);
+                var fromCacheModel = JsonConvert.DeserializeObject<BuildCache>(deserializeContent);
+                
+                // END
+
+                return this;
             }
         }
     }
